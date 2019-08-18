@@ -1,0 +1,15 @@
+#rewrites the webserver
+
+RewriteEngine On
+
+#dont't use rewrite rule if its a directory and a file
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+RewriteCond $1 !^(config|core|css|js|fonts|robots\.txt)
+
+#usage of qsa can be used maybe here
+#index.php will be loaded if there is anything
+#$1 are the parameters?
+RewriteRule ^(.+)$ index.php/$1 [L]
