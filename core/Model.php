@@ -29,25 +29,48 @@ class Model{
     return $this->_db->get_columns($this->_table);//we don't know yet how our table name is -> ?but we know it as soon it gets here
   }
 
+  //manipulates date before it will be sent to the database
+protected function _softDeleteParams($params){ //will be called in find -> because of softdelete -> protected -> because children need it
+  if($this->_softDelete){
+    if(array_key_exists("conditions", $params)){
+      if(is_array($params["conditions"])){
+        $params["conditions"][] = "deleted != 1";
+      }else{ // if its not an array we think its a string and we're concatenating our condition
+        $params["conditions"].=" AND deleted != 1";
+      }
+    } else {//if $params = empty array we create a conditions -> see function find();
+      $params["conditions"] = "deleted != 1";
+    }
+  }
+  return $params;
+
+}
+
   public function find($params = []){
+    $params = $this->_softDeleteParams($params);
     $results = [];
     $resultsQuery = $this->_db->find($this->_table, $params);
+
+    if(!$resultsQuery) return[]; //without that invalid argument supplied for foreach
     //other orm/frame pass back an object for each result that have all functions awailable to them
     foreach($resultsQuery as $key => $result){
       $obj = new $this->_modelName($this->_table);
       $obj->populateObjData($result);
-      $result[] = $obj;
+      $results[] = $obj;
 
     }
       return $results;
   }
 
   public function findFirst($params = []){
+    $params = $this->_softDeleteParams($params);
     $resultQuery = $this->_db->findFirst($this->_table, $params);
     $result = new $this->_modelName($this->_table);
     //check if username exists -> populateObjData would not work
     if($resultQuery){
       $result->populateObjData($resultQuery);
+    } else {
+      $result = false;
     }
 
     return $result;
@@ -85,7 +108,7 @@ class Model{
   public function delete($id = ""){
     if($id == "" && $this->id == "") return false;
     $id = ($id == "")?$this->id : $id; // if id is set in the object we don't have specify -> deletes the object we're currently on
-    if($this->_softDelete){
+    if($this->_softDelete){//softdelate allows something in the database -> setting a boolian
       return $this->update($id, ["deleted" => 1]);
     }
     return $this->_db->delete($this->_table, $id);

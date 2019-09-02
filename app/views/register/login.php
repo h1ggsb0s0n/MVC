@@ -31,7 +31,7 @@ hat anscheinend was mit bootstrap zu tun. md => desktop
 
     </div>
     <div class="text-right">
-      <a href="<?PROOT?>register/register" class = "text-primary">Register</a>
+      <a href="<?=PROOT?>register/register" class = "text-primary">Register</a>
     </div>
   </form>
 </div>

@@ -42,7 +42,7 @@ Nachschauen: type:submit bei button und action bei dem form -> zusammenhang
 // difference == and ===
 // == checks values -> === checks values and type
 
-class Register extends Controller {
+class RegisterController extends Controller {
   public function __construct($controller, $action){
     parent::__construct($controller, $action);
     $this->load_model("Users");

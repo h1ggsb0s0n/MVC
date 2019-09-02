@@ -9,6 +9,13 @@ die();
 echo"</pre>";
 }
 
+function dnnd($data){
+  echo "<pre>";
+
+  var_dump($data);
+  echo"</pre>";
+}
+
 function sanitize($dirty){
   return htmlentities($dirty, ENT_QUOTES, "UTF-8");
   //This function converts all characters that are applicable to HTML entity.
@@ -33,6 +40,15 @@ function posted_values($post){
     $clean_ary[$key] = sanitize($value);
   }
   return $clean_ary;
+}
+
+function currentPage(){
+  $currentPage = $_SERVER["REQUEST_URI"];
+  if($currentPage == PROOT || $currentPage == PROOT."home/index"){
+    $currentPage = PROOT."home";
+  }
+
+  return $currentPage;
 }
 
 ?>

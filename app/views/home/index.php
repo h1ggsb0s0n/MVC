@@ -6,6 +6,7 @@
 <?php $this->end(); ?>
 <?php $this->start("body");?>
 <h1 class ="text-center red">This is the body of the Homescreen</h2>
+
 <?= $this->siteTitle()?>;
 <meta content = "test body"/>
 <!--Anything that is written here belongs to the body of the html

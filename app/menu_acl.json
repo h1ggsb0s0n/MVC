@@ -1,0 +1,20 @@
+{
+  "Home" : "home",
+  "Contacts": {
+    "My Contacts": "contacts",
+    "Add Contact": "contacts/add"
+  },
+  "Tools" : {
+    "My Tools" : "tools",
+    "Tool 1" : "tools/first",
+    "Tool 2" : "tools/second",
+    "separator" : "",
+    "Tool 3" : "tools/third"
+  },
+
+  "Google" : "https://www.google.com",
+  "PHP Docs" : "https://php.net/manual/en",
+  "Login" : "register/login",
+  "Logout": "register/logout"
+
+}

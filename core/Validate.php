@@ -103,8 +103,11 @@ public function passed(){
 }
 
 //boostrap nescessary for this function
+//if we're making changes to this one empty cash on firefox is needed why? see custom css -> on firefox just use reload
+//$hasErrors -> we can give it a class and in future projects -> we can use it
 public function displayErrors(){
-  $html = '<ul class="bg-danger">';
+  $hasErrors = (!empty($this->_errors))?' has-errors' : '';
+  $html = '<ul class="bg-danger'.$hasErrors.'">';
   foreach($this->_errors as $error){
     if(is_array($error)){
       $html .= '<li class="text-danger">'.$error[0].'</li>';

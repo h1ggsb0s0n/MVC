@@ -15,7 +15,7 @@ public function render($viewName){
   if(file_exists(ROOT.DS."app".DS."views".DS.$viewString.".php")){
     include(ROOT.DS."app".DS."views".DS.$viewString.".php");
     include(ROOT.DS."app".DS."views".DS."layouts".DS.$this->_layout.".php");
-
+    //dnd($viewString);
   }else{
     die("The view ".$viewName. " does not exist");
   }
@@ -63,6 +63,14 @@ $this->_siteTitle =$title;
 
 public function setLayout($path){
   $this->_layout = $path;
+}
+
+public function insert($path){
+  include ROOT.DS."app".DS."views".DS.$path.".php";
+}
+
+public function partial($group, $partial){
+  include ROOT.DS."app".DS."views".DS.$group.DS."partials".DS.$partial.".php";
 }
 
 

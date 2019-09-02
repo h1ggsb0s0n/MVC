@@ -1,7 +1,7 @@
 <?php
 
 //every controller has its own set of Views in a seperate folder in the app/view
-class Home extends Controller{
+class HomeController extends Controller{
 
   public function __construct($controller, $action){
     parent::__construct($controller, $action);

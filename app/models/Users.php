@@ -85,6 +85,11 @@ public static function loginUserFromCookie(){
     $this->save();
   }
 
+  public function acls(){ //per user more overrides are possible
+    if(empty($this->acl)) return []; // in the database users table its called acl // what does empty do? f.e. the data used in the acl column => JSon array f.e. ["gold", "silver"]
+    return json_decode($this->acl, true);
+  }
+
 }
 
  ?>
